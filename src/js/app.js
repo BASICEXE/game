@@ -1,12 +1,11 @@
 require('./enchant.min.js');
-
 enchant()
 
+import Main from './_main'
+
 window.onload = function(){
-  const game = new Game(320, 320)
-
-  const label = new Label('Hello, enchant.js!')
-  game.rootScene.addChild(label)
-
-  game.start()
+  const core = new Core(320, 320)
+  Main.init(core)
+  Main.facade()
+  Main.start()
 }
