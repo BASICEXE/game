@@ -1,4 +1,4 @@
-import Test from './model/_ninja'
+import Item from './model/_item'
 
 class Main {
   constructor() {
@@ -25,23 +25,16 @@ class Main {
     console.log('Main.facade')
     // const label = new Label('Hello, enchant.js!')
     // this.game.rootScene.addChild(label)
-    this.game.onload = () => this.load()
       // this.game.rootScene.addChild(label)
       // this.game.rootScene.backgroundColor = '#333'
+    this.game.onload = () => this.load()
   }
 
   load() {
     console.log('Main.load')
-    const test = new Test(32, 32)
-    const ninja = test.instance(this.game.assets['img/test.gif'])
+    const item = new Item(32, 32)
+    const ninja = item.instance(this.game.assets['img/test.gif'])
     this.game.rootScene.addChild(ninja)
-
-    ninja.on('enterframe', function() {
-      this.x += 1
-      // this.rotate(2)
-      // this.scale(1.01, 1.01)
-      if (this.x > 320) this.x = 0
-    })
   }
 
   start() {
