@@ -10,7 +10,6 @@ class Main {
     console.log('Main.init')
     this.game = game
     this.game.fps = 24
-    this.game.preload('img/test.gif')
     // this.game.addEventListener('load', () => {
     //   this.game.pushScene( this.game.mainScene() )
     // })
@@ -19,20 +18,21 @@ class Main {
     //   scene.backgroundColor = 'black'
     //   return scene
     // }
+    this.game.onload = () => this.load()
   }
 
   facade() {
     console.log('Main.facade')
+    this.game.preload('img/test.gif')
     // const label = new Label('Hello, enchant.js!')
     // this.game.rootScene.addChild(label)
       // this.game.rootScene.addChild(label)
       // this.game.rootScene.backgroundColor = '#333'
-    this.game.onload = () => this.load()
   }
 
   load() {
     console.log('Main.load')
-    const item = new Item(32, 32)
+    const item = new Item(32, 32, this.game)
     const ninja = item.instance(this.game.assets['img/test.gif'])
     this.game.rootScene.addChild(ninja)
   }
