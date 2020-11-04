@@ -37,7 +37,7 @@ class Main {
     const ninja = item.instance(this.game.assets['img/test.gif'])
     this.game.rootScene.addChild(ninja)
 
-    const circle = this.factory().square(100, 100, 'rgba(252, 0, 0, 0.8)')
+    const circle = this.factory().circle(100, 100, 'rgba(252, 0, 0, 0.8)')
     this.game.rootScene.addChild(circle)
   }
 
