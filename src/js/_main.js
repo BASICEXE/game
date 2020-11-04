@@ -1,4 +1,5 @@
 import Item from './model/_item'
+import Factory from './model/_factory'
 
 class Main {
   constructor() {
@@ -35,11 +36,23 @@ class Main {
     const item = new Item(32, 32, this.game)
     const ninja = item.instance(this.game.assets['img/test.gif'])
     this.game.rootScene.addChild(ninja)
+
+    const circle = this.factory().square(100, 100, 'rgba(252, 0, 0, 0.8)')
+    this.game.rootScene.addChild(circle)
+  }
+
+  factory() {
+    return Factory
   }
 
   start() {
     console.log('Main.start')
     this.game.start()
+  }
+
+  stop() {
+    console.log('Main.stop')
+    this.game.stop()
   }
 }
 export default new Main()

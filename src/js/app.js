@@ -3,6 +3,8 @@ enchant()
 
 import Main from './_main'
 
+window.main = Main
+
 window.onload = function(){
   console.log('読み込み完了')
   const core = new Core(640, 640)
