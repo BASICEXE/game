@@ -1,5 +1,7 @@
 import Item from './model/_item'
 import Factory from './model/_factory'
+import Controller from './model/_controller'
+// import Jump from './button/_jump'
 
 class Main {
   constructor() {
@@ -37,8 +39,11 @@ class Main {
     const ninja = item.instance(this.game.assets['img/test.gif'])
     this.game.rootScene.addChild(ninja)
 
-    const circle = this.factory().circle(100, 100, 'rgba(252, 0, 0, 0.8)')
-    this.game.rootScene.addChild(circle)
+    const circle = this.factory().circle(40, 40, 'rgba(252, 0, 0, 0.8)')
+    const button2 = new Button('ボタン', 'light', 20, 320)
+    this.game.rootScene.addChild(button2)
+    const test = new Controller(circle, this.game).instance()
+    this.game.rootScene.addChild(test)
   }
 
   factory() {
