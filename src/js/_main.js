@@ -37,9 +37,17 @@ class Main {
     console.log('Main.load')
     const item = new Item(32, 32, this.game)
     const ninja = item.instance(this.game.assets['img/test.gif'])
+
+    item.on((item) => {
+      if (this.game.input.left) item.x -= 5
+      if (this.game.input.right) item.x += 5
+      if (this.game.input.up) item.y -= 5
+      if (this.game.input.down) item.y += 5
+    })
+
     this.game.rootScene.addChild(ninja)
 
-    const circle = this.factory().circle(40, 40, 'rgba(252, 0, 0, 0.8)')
+        const circle = this.factory().circle(40, 40, 'rgba(252, 0, 0, 0.8)')
     const button2 = new Button('ボタン', 'light', 20, 320)
     this.game.rootScene.addChild(button2)
     const test = new Controller(circle, this.game).instance()
