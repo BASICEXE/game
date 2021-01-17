@@ -1,6 +1,6 @@
 import Item from './model/_item'
 import Factory from './model/_factory'
-import Controller from './model/_controller'
+// import Controller from './model/_controller'
 // import Jump from './button/_jump'
 
 class Main {
@@ -33,29 +33,8 @@ class Main {
       // this.game.rootScene.backgroundColor = '#333'
   }
 
-  load() {
-    console.log('Main.load')
-    const item = new Item(32, 32, this.game)
-    const ninja = item.instance(this.game.assets['img/test.gif'])
-
-    item.on((item) => {
-      if (this.game.input.left) item.x -= 5
-      if (this.game.input.right) item.x += 5
-      if (this.game.input.up) item.y -= 5
-      if (this.game.input.down) item.y += 5
-    })
-
-    this.game.rootScene.addChild(ninja)
-
-        const circle = this.factory().circle(40, 40, 'rgba(252, 0, 0, 0.8)')
-    const button2 = new Button('ボタン', 'light', 20, 320)
-    this.game.rootScene.addChild(button2)
-    const test = new Controller(circle, this.game).instance()
-    this.game.rootScene.addChild(test)
-  }
-
-  factory() {
-    return Factory
+  assets() {
+    this.ninja = this.game.assets['img/test.gif']
   }
 
   start() {
@@ -66,6 +45,26 @@ class Main {
   stop() {
     console.log('Main.stop')
     this.game.stop()
+  }
+
+  load() {
+    console.log('Main.load')
+    this.assets()
+    const item = new Item(32, 32, this.game)
+    item.image(this.ninja)
+    item.apply()
+
+
+    // const circle = this.factory().circle(40, 40, 'rgba(252, 0, 0, 0.8)')
+    // const button2 = new Button('ボタン', 'light', 20, 320)
+
+    // const test = new Controller(circle, this.game).instance()
+
+    // this.game.rootScene.addChild(button2)
+  }
+
+  factory() {
+    return Factory
   }
 }
 export default new Main()
