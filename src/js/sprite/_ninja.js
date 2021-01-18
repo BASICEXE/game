@@ -1,11 +1,8 @@
-class Item {
-  constructor(x, y, game) {
-    this.item = new Sprite(x, y)
-    this.item.x = 0
-    this.item.y = 0
-    this.game = game
+import Base from './_base'
 
-    this.item.on('enterframe', () => this.on())
+class Ninja extends Base {
+  constructor(x, y, game) {
+    super(x, y, game)
   }
 
   on() {
@@ -18,18 +15,6 @@ class Item {
     // }
     // this.frame = this.walkPattern[this.walkIndex];
   }
-
-  image(data) {
-    this.item.image = data
-  }
-
-  instance() {
-    return this.item
-  }
-
-  apply() {
-    this.game.rootScene.addChild(this.item)
-  }
 }
 
-export default Item
+export default Ninja
