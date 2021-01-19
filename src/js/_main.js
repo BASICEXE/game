@@ -54,6 +54,7 @@ class Main {
     this.assets()
     this.items.ninja = new Ninja(32, 32, this.game)
     this.items.ninja.image(this.asset.ninja).apply()
+
     // const circle = this.factory().circle(40, 40, 'rgba(252, 0, 0, 0.8)')
     // const button2 = new Button('ボタン', 'light', 20, 320)
 
