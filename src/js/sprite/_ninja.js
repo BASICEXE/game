@@ -6,6 +6,9 @@ class Ninja extends Base {
     this.isJump = false
     this.item.on('touchstart', () => this.touchstart())
     this.item.on('touchend', () => this.touchend())
+    this.item.x = 100
+    this.item.scale(2)
+    this.item.scaleX = -2
     this.GROUND_Y = 500
   }
 
