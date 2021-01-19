@@ -6,26 +6,29 @@ class Ninja extends Base {
     this.isJump = false
     this.item.on('touchstart', () => this.touchstart())
     this.item.on('touchend', () => this.touchend())
+    this.GROUND_Y = 500
   }
 
   touchstart() {
     if (!this.isJump) {
       this.isJump = true
-      this.vy = -10
+      this.vy = -25
     }
   }
 
   touchend() {
+    if(this.isJump && this.vy < 0){
+      this.vy /= 2;
+    }
   }
 
   jump() {
-    const GROUND_Y = 100
     // ジャンプ中
     if (this.isJump) {
       this.vy += 1
       this.item.y += this.vy
-      if (this.item.y >= GROUND_Y) {
-        this.item.y = GROUND_Y
+      if (this.item.y >= this.GROUND_Y) {
+        this.item.y = this.GROUND_Y
         this.isJump = false
       }
     }
