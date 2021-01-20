@@ -1,5 +1,6 @@
 import './enchant.js'
 import './plugins/ui.enchant'
+import './plugins/avatar.enchant'
 enchant()
 
 import Main from './_main'

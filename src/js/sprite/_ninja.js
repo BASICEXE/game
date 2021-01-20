@@ -9,13 +9,14 @@ class Ninja extends Base {
     this.item.x = 100
     this.item.scale(2)
     this.item.scaleX = -2
-    this.GROUND_Y = 500
+    this.GROUND_Y = 482
+    this.item.y = this.GROUND_Y
   }
 
   touchstart() {
     if (!this.isJump) {
       this.isJump = true
-      this.vy = -25
+      this.vy = -20
     }
   }
 

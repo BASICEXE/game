@@ -1,5 +1,6 @@
 import Factory from './model/_factory'
 import Ninja from './sprite/_ninja'
+import Bg from './sprite/_bg'
 // import Controller from './model/_controller'
 // import Jump from './button/_jump'
 
@@ -28,8 +29,8 @@ class Main {
 
   facade() {
     console.log('Main.facade')
-    this.game.preload('img/test.gif')
-
+    this.game.preload('img/test.gif', 'img/bg.png')
+    // this.game.preload('avatarBg1.png', 'avatarBg2.png', 'avatarBg3.png')
     // const label = new Label('Hello, enchant.js!')
     // this.game.rootScene.addChild(label)
     // this.game.rootScene.backgroundColor = '#333'
@@ -37,6 +38,7 @@ class Main {
 
   assets() {
     this.asset.ninja = this.game.assets['img/test.gif']
+    this.asset.bg = this.game.assets['img/bg.png']
   }
 
   start() {
@@ -52,9 +54,15 @@ class Main {
   load() {
     console.log('Main.load')
     this.assets()
+    this.items.bg = new Bg(640, 640, this.game)
+    this.items.bg.image(this.asset.bg).init(1).apply()
+
+    this.items.bg2 = new Bg(640, 640, this.game)
+    this.items.bg2.image(this.asset.bg).init(640).apply()
+
     this.items.ninja = new Ninja(32, 32, this.game)
     this.items.ninja.image(this.asset.ninja).apply()
-
+    // this.game.rootScene.addChild(bg)
     // const circle = this.factory().circle(40, 40, 'rgba(252, 0, 0, 0.8)')
     // const button2 = new Button('ボタン', 'light', 20, 320)
 
