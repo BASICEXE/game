@@ -8,15 +8,17 @@ class Ninja extends Base {
     this.item.on('touchend', () => this.touchend())
     this.item.x = 100
     this.item.scale(2)
-    this.item.scaleX = -2
-    this.GROUND_Y = 482
+    this.item.frame = [0, 1, 2]
+    this.GROUND_Y = 492
     this.item.y = this.GROUND_Y
   }
 
   touchstart() {
     if (!this.isJump) {
+      this.soundEffect.play()
       this.isJump = true
       this.vy = -20
+      this.item.frame = 0
     }
   }
 
@@ -34,18 +36,13 @@ class Ninja extends Base {
       if (this.item.y >= this.GROUND_Y) {
         this.item.y = this.GROUND_Y
         this.isJump = false
+        this.item.frame = [0, 1, 2]
       }
     }
   }
 
   on() {
-    if (this.game.input.up) this.item.y -= 5
-    if (this.game.input.down) this.item.y += 5
     this.jump()
-    // if(++this.walkIndex >= this.walkPattern.length){
-    //   this.walkIndex = 0;
-    // }
-    // this.frame = this.walkPattern[this.walkIndex];
   }
 }
 

@@ -16,6 +16,11 @@ class Base {
     return this
   }
 
+  soundEffect(sound) {
+    this.soundEffect = sound
+    return this
+  }
+
   apply() {
     this.game.rootScene.addChild(this.item)
     return this

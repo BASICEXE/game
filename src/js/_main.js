@@ -1,6 +1,7 @@
 import Factory from './model/_factory'
 import Ninja from './sprite/_ninja'
 import Bg from './sprite/_bg'
+import Jump from './sprite/_janpBtn'
 // import Controller from './model/_controller'
 // import Jump from './button/_jump'
 
@@ -29,16 +30,18 @@ class Main {
 
   facade() {
     console.log('Main.facade')
-    this.game.preload('img/test.gif', 'img/bg.png')
-    // this.game.preload('avatarBg1.png', 'avatarBg2.png', 'avatarBg3.png')
+    this.game.preload('img/ninja.png', 'img/bg.jpg', 'img/btn_jump.png')
+    this.game.preload('bgm/se_maoudamashii_retro08.mp3')
     // const label = new Label('Hello, enchant.js!')
     // this.game.rootScene.addChild(label)
     // this.game.rootScene.backgroundColor = '#333'
   }
 
   assets() {
-    this.asset.ninja = this.game.assets['img/test.gif']
-    this.asset.bg = this.game.assets['img/bg.png']
+    this.asset.ninja = this.game.assets['img/ninja.png']
+    this.asset.bg = this.game.assets['img/bg.jpg']
+    this.asset.jump = this.game.assets['bgm/se_maoudamashii_retro08.mp3'].clone()
+    this.asset.jumpBtn = this.game.assets['img/btn_jump.png']
   }
 
   start() {
@@ -60,10 +63,14 @@ class Main {
     this.items.bg2 = new Bg(640, 640, this.game)
     this.items.bg2.image(this.asset.bg).init(640).apply()
 
-    this.items.ninja = new Ninja(32, 32, this.game)
-    this.items.ninja.image(this.asset.ninja).apply()
-    // this.game.rootScene.addChild(bg)
+    this.items.ninja = new Ninja(16, 25, this.game)
+    this.items.ninja.image(this.asset.ninja).soundEffect(this.asset.jump).apply()
+
+
+    this.items.jumpBtn = new Jump(50, 50, this.game)
+    this.items.jumpBtn.image(this.asset.jumpBtn).setPrayer(this.items.ninja).apply()
     // const circle = this.factory().circle(40, 40, 'rgba(252, 0, 0, 0.8)')
+    // this.game.rootScene.addChild(bg)
     // const button2 = new Button('ボタン', 'light', 20, 320)
 
     // const test = new Controller(circle, this.game).instance()
