@@ -1,19 +1,20 @@
 import Base from './_base'
 
 class Ninja extends Base {
-  constructor(game) {
-    super(16, 25, game)
+  constructor(Controller) {
+    super(16, 25, Controller)
     this.isJump = false
     this.GROUND_Y = 492
     this.item.on('touchstart', () => this.touchstart())
     this.item.on('touchend', () => this.touchend())
-    this.item.x = 100
+    this.item.x = 50
     this.item.scale(2)
     this.item.frame = [0, 1, 2]
     this.item.y = this.GROUND_Y
 
     this.soundEffect = this.game.assets['bgm/se_maoudamashii_retro08.mp3'].clone()
     this.image = this.game.assets['img/ninja.png']
+    return this
   }
 
   touchstart() {
@@ -46,7 +47,10 @@ class Ninja extends Base {
 
   run() {
     if (!this.isJump) {
-      this.item.x += 1
+      this.item.x += 100
+    }
+    if (this.item.x > 650) {
+      this.controller.clear()
     }
   }
 

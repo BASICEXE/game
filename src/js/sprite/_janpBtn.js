@@ -1,8 +1,8 @@
 import Base from './_base'
 
 class jumpBtn extends Base {
-  constructor(game) {
-    super(50, 50, game)
+  constructor(Controller) {
+    super(50, 50, Controller)
     this.item.y = 550
     this.item.x = 500
     // this.item.scale(2)
@@ -11,6 +11,7 @@ class jumpBtn extends Base {
 
     this.player = null
     this.image = this.game.assets['img/btn_jump.png']
+    return this
   }
 
   on() {

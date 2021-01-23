@@ -38,13 +38,56 @@ class Main {
   }
 
   on() {
-    console.log('Main.on', this.game)
+    console.log('Main.on')
     this.flameCount += 1
     this.second = this.flameCount / this.fps
   }
 
+  removeScene(scene) {
+    if (!scene) return
+    while(scene.firstChild){
+        scene.removeChild(scene.firstChild);
+    }
+  }
+
+  replaceScene(scene) {
+    this.game.replaceScene(scene)
+  }
+
+  titleScene(old) {
+    this.removeScene(old)
+    const scene = new Scene()
+    const label = new Label('右端まで走りきれ タッチでゲームシーンへ')
+    scene.addChild(label)
+    scene.on('touchstart', () => this.gameScene(scene))
+    this.replaceScene(scene)
+  }
+
+  gameScene(old) {
+    this.removeScene(old)
+    const scene = new Scene()
+
+    this.items.bg = new Bg(this).init(1).apply(scene)
+    this.items.bg2 = new Bg(this).init(640).apply(scene)
+    this.items.river = new River(this).apply(scene)
+    this.items.ninja = new Ninja(this).apply(scene)
+    this.items.jumpBtn = new Jump(this).setPrayer(this.items.ninja).apply(scene)
+    this.replaceScene(scene)
+  }
+
+  clearScene(old) {
+    this.removeScene(old)
+    const scene = new Scene()
+    const label = new Label('GAME CLEAR')
+    scene.addChild(label)
+    scene.on('touchstart', () => this.titleScene())
+    this.replaceScene(scene)
+  }
+
+
   start() {
     console.log('Main.start')
+    this.titleScene()
     this.game.start()
   }
 
@@ -53,22 +96,12 @@ class Main {
     this.game.stop()
   }
 
+  clear() {
+    this.clearScene()
+  }
+
   load() {
     console.log('Main.load')
-    this.items.bg = new Bg(this.game)
-    this.items.bg.init(1).apply()
-
-    this.items.bg2 = new Bg(this.game)
-    this.items.bg2.init(640).apply()
-
-    this.items.river = new River(this.game)
-    this.items.river.apply()
-
-    this.items.ninja = new Ninja(this.game)
-    this.items.ninja.apply()
-
-    this.items.jumpBtn = new Jump(this.game)
-    this.items.jumpBtn.setPrayer(this.items.ninja).apply()
   }
 }
 export default new Main()

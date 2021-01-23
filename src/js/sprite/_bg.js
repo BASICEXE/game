@@ -1,12 +1,13 @@
 import Base from './_base'
 
 class Bg extends Base {
-  constructor(game) {
-    super(640, 640, game)
+  constructor(Controller) {
+    super(640, 640, Controller)
     this.item.y = 0
     this.item.frame = 0
     this.SCROLL_SPEED = 10
     this.image = this.game.assets['img/bg.jpg']
+    return this
   }
 
   init(num) {

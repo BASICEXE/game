@@ -1,9 +1,10 @@
 class Base {
-  constructor(x, y, game) {
+  constructor(x, y, Controller) {
+    this.controller = Controller 
     this.item = new Sprite(x, y)
     this.item.x = 0
     this.item.y = 0
-    this.game = game
+    this.game = Controller.game
 
     this.item.on('enterframe', () => this.on())
   }
@@ -17,9 +18,9 @@ class Base {
     return this
   }
 
-  apply() {
+  apply(scene) {
     this.item.image = this.image
-    this.game.rootScene.addChild(this.item)
+    scene.addChild(this.item)
     return this
   }
 
