@@ -11,18 +11,20 @@ class Base {
   on() {
   }
 
-  image(data) {
-    this.item.image = data
-    return this
-  }
 
-  soundEffect(sound) {
-    this.soundEffect = sound
+  before(reference) {
+    this.game.rootScene.insertBefore(this.item, reference)
     return this
   }
 
   apply() {
+    this.item.image = this.image
     this.game.rootScene.addChild(this.item)
+    return this
+  }
+
+  remove() {
+    this.game.rootScene.removeChild(this.item)
     return this
   }
 

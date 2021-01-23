@@ -1,14 +1,16 @@
 import Base from './_base'
 
 class jumpBtn extends Base {
-  constructor(x, y, game) {
-    super(x, y, game)
+  constructor(game) {
+    super(50, 50, game)
     this.item.y = 550
     this.item.x = 500
-    this.player = null
     // this.item.scale(2)
     this.item.on('touchstart', () => this.touchstart())
     this.item.on('touchend', () => this.touchend())
+
+    this.player = null
+    this.image = this.game.assets['img/btn_jump.png']
   }
 
   on() {
