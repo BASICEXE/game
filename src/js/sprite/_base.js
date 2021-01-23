@@ -18,14 +18,14 @@ class Base {
     return this
   }
 
-  apply(scene) {
+  apply() {
     this.item.image = this.image
-    scene.addChild(this.item)
+    this.controller.scene.addChild(this.item)
     return this
   }
 
   remove() {
-    this.game.rootScene.removeChild(this.item)
+    this.controller.scene.removeChild(this.item)
     return this
   }
 

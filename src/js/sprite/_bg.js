@@ -5,7 +5,6 @@ class Bg extends Base {
     super(640, 640, Controller)
     this.item.y = 0
     this.item.frame = 0
-    this.SCROLL_SPEED = 10
     this.image = this.game.assets['img/bg.jpg']
     return this
   }
@@ -16,9 +15,9 @@ class Bg extends Base {
   }
 
   on() {
-    this.item.x += -10
-    if (this.item.x <= -630) {
-      this.item.x = 630
+    this.item.x += this.controller.SCROLL_SPEED
+    if (this.item.x <= -640) {
+      this.item.x = 640
     }
   }
 }

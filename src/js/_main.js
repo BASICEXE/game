@@ -3,11 +3,13 @@ import Ninja from './sprite/_ninja'
 import Bg from './sprite/_bg'
 import Jump from './sprite/_janpBtn'
 import River from './sprite/_river'
+import Maluta from './sprite/_malta'
 
 class Main {
   constructor() {
     console.log('Main.constructor')
     this.game = null
+    this.SCROLL_SPEED = -10
   }
 
   init(game) {
@@ -29,11 +31,12 @@ class Main {
     this.asset = {}
     this.flameCount = 0
     this.second = 0
+    this.scene = null
   }
 
   facade() {
     console.log('Main.facade')
-    this.game.preload('img/ninja.png', 'img/bg.jpg', 'img/btn_jump.png', 'img/kawa.png')
+    this.game.preload('img/ninja.png', 'img/bg.jpg', 'img/btn_jump.png', 'img/kawa.png', 'img/maruta.jpg')
     this.game.preload('bgm/se_maoudamashii_retro08.mp3')
   }
 
@@ -57,13 +60,14 @@ class Main {
 
   replaceScene(scene) {
     this.game.replaceScene(scene)
+    this.scene = scene
   }
 
   titleScene(old) {
     this.removeScene(old)
     const scene = new Scene()
     scene.backgroundColor = 'ffffff'
-    const label = new Label('右端まで走りきれ<br><br> タッチでゲームシーンへ')
+    const label = new Label('右端まで最速で走りきれ<br><br> タッチでゲームシーンへ')
     label.textAlign = 'center'
     label.x = 180
     label.y = 300
@@ -81,12 +85,13 @@ class Main {
     const scene = new Scene()
     scene.backgroundColor = '#fcc800'
 
-    this.items.bg = new Bg(this).init(1).apply(scene)
-    this.items.bg2 = new Bg(this).init(640).apply(scene)
-    this.items.river = new River(this).apply(scene)
-    this.items.ninja = new Ninja(this).apply(scene)
-    this.items.jumpBtn = new Jump(this).setPrayer(this.items.ninja).apply(scene)
     this.replaceScene(scene)
+    this.items.bg = new Bg(this).init(1).apply()
+    this.items.bg2 = new Bg(this).init(640).apply()
+    this.items.river = new River(this)
+    this.items.maluta = new Maluta(this)
+    this.items.prayer = new Ninja(this).apply()
+    this.items.jumpBtn = new Jump(this).apply()
   }
 
   clearScene(old) {

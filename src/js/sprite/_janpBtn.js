@@ -9,7 +9,7 @@ class jumpBtn extends Base {
     this.item.on('touchstart', () => this.touchstart())
     this.item.on('touchend', () => this.touchend())
 
-    this.player = null
+    this.player = this.controller.items.prayer
     this.image = this.game.assets['img/btn_jump.png']
     return this
   }
@@ -23,11 +23,6 @@ class jumpBtn extends Base {
 
   touchend() {
     this.player.touchend()
-  }
-
-  setPrayer(player) {
-    this.player = player
-    return this
   }
 }
 
