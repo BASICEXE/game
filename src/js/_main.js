@@ -43,6 +43,11 @@ class Main {
     this.second = this.flameCount / this.fps
   }
 
+  timerInit() {
+    this.flameCount = 0
+    this.second = 0
+  }
+
   removeScene(scene) {
     if (!scene) return
     while(scene.firstChild){
@@ -57,15 +62,24 @@ class Main {
   titleScene(old) {
     this.removeScene(old)
     const scene = new Scene()
-    const label = new Label('右端まで走りきれ タッチでゲームシーンへ')
+    scene.backgroundColor = 'ffffff'
+    const label = new Label('右端まで走りきれ<br><br> タッチでゲームシーンへ')
+    label.textAlign = 'center'
+    label.x = 230
+    label.y = 300
+    // label.color = '#ffffff'
+    label.font = '26px sans-serif'
     scene.addChild(label)
     scene.on('touchstart', () => this.gameScene(scene))
     this.replaceScene(scene)
+    scene.backgroundColor = '#00fceb'
   }
 
   gameScene(old) {
     this.removeScene(old)
+    this.timerInit()
     const scene = new Scene()
+    scene.backgroundColor = '#fcc800'
 
     this.items.bg = new Bg(this).init(1).apply(scene)
     this.items.bg2 = new Bg(this).init(640).apply(scene)
@@ -79,7 +93,15 @@ class Main {
     this.removeScene(old)
     const scene = new Scene()
     const label = new Label('GAME CLEAR')
+    label.y = 300
+    label.x = 300
+    label.font = '26px sans-serif'
+    const time = new Label(`クリアタイム ${this.second}秒`)
+    time.font = '26px sans-serif'
+    time.y = 400
+    time.x = 300
     scene.addChild(label)
+    scene.addChild(time)
     scene.on('touchstart', () => this.titleScene())
     this.replaceScene(scene)
   }
