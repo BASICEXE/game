@@ -65,7 +65,7 @@ class Main {
     scene.backgroundColor = 'ffffff'
     const label = new Label('右端まで走りきれ<br><br> タッチでゲームシーンへ')
     label.textAlign = 'center'
-    label.x = 230
+    label.x = 180
     label.y = 300
     // label.color = '#ffffff'
     label.font = '26px sans-serif'
@@ -93,13 +93,14 @@ class Main {
     this.removeScene(old)
     const scene = new Scene()
     const label = new Label('GAME CLEAR')
-    label.y = 300
-    label.x = 300
+    label.y = 280
+    label.x = 230
     label.font = '26px sans-serif'
+
     const time = new Label(`クリアタイム ${this.second}秒`)
     time.font = '26px sans-serif'
-    time.y = 400
-    time.x = 300
+    time.y = 320
+    time.x = 180
     scene.addChild(label)
     scene.addChild(time)
     scene.on('touchstart', () => this.titleScene())

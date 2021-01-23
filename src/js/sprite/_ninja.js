@@ -47,7 +47,7 @@ class Ninja extends Base {
 
   run() {
     if (!this.isJump) {
-      this.item.x += 100
+      this.item.x += 10
     }
     if (this.item.x > 650) {
       this.controller.clear()
