@@ -1,6 +1,9 @@
 // import Factory from './model/_factory'
 import Ninja from './sprite/_ninja'
 import Bg from './sprite/_bg'
+import Cloud from './sprite/_cloud'
+import Mountain from './sprite/_mountain'
+import Ground from './sprite/_ground'
 import Jump from './sprite/_janpBtn'
 import River from './sprite/_river'
 import Maluta from './sprite/_malta'
@@ -36,7 +39,7 @@ class Main {
 
   facade() {
     console.log('Main.facade')
-    this.game.preload('img/ninja.png', 'img/bg.jpg', 'img/btn_jump.png', 'img/kawa.png', 'img/maruta.jpg')
+    this.game.preload('img/ninja.png', 'img/bg.jpg', 'img/btn_jump.png', 'img/kawa.png', 'img/maruta.jpg', 'img/cloud.png', 'img/mountain.png', 'img/grand.png')
     this.game.preload('bgm/se_maoudamashii_retro08.mp3')
   }
 
@@ -82,15 +85,20 @@ class Main {
     this.removeScene(old)
     this.timerInit()
     const scene = new Scene()
-    scene.backgroundColor = '#fcc800'
 
     this.replaceScene(scene)
-    this.items.bg = new Bg(this).init(1).apply()
-    this.items.bg2 = new Bg(this).init(640).apply()
-    this.items.river = new River(this)
-    this.items.maluta = new Maluta(this)
-    this.items.prayer = new Ninja(this).apply()
-    this.items.jumpBtn = new Jump(this).apply()
+    scene.backgroundColor = '#4a62e6'
+    // this.items.bg = new Bg(this).init(1).apply()
+    // this.items.bg2 = new Bg(this).init(640).apply()
+    //
+    new Cloud(this).apply()
+    new Cloud(this).apply()
+    new Mountain(this).apply()
+    new Ground(this).apply()
+    // this.items.river = new River(this)
+    // this.items.maluta = new Maluta(this)
+    // this.items.prayer = new Ninja(this).apply()
+    // this.items.jumpBtn = new Jump(this).apply()
   }
 
   clearScene(old) {

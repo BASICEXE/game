@@ -12,6 +12,9 @@ class Base {
   on() {
   }
 
+  random(min = 0, max = 0) {
+    return Math.floor( Math.random() * (max + 1 - min) ) + min
+  }
 
   before(reference) {
     this.game.rootScene.insertBefore(this.item, reference)
