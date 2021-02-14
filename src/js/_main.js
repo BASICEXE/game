@@ -66,17 +66,16 @@ class Main {
   titleScene(old) {
     this.removeScene(old)
     const scene = new Scene()
-    scene.backgroundColor = 'ffffff'
     const label = new Label('右端まで最速で走りきれ<br><br> タッチでゲームシーンへ')
     label.textAlign = 'center'
     label.x = 180
     label.y = 300
-    // label.color = '#ffffff'
     label.font = '26px sans-serif'
+    label.color = '#ffffff'
     scene.addChild(label)
     scene.on('touchstart', () => this.gameScene(scene))
     this.replaceScene(scene)
-    scene.backgroundColor = '#00fceb'
+    scene.backgroundColor = '#4a62e6'
   }
 
   gameScene(old) {
