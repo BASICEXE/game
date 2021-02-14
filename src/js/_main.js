@@ -35,6 +35,7 @@ class Main {
     this.flameCount = 0
     this.second = 0
     this.scene = null
+    this.gameStart = false
   }
 
   facade() {
@@ -47,6 +48,13 @@ class Main {
     console.log('Main.on')
     this.flameCount += 1
     this.second = this.flameCount / this.fps
+
+    if (this.gameStart) {
+      const second = this.flameCount % this.fps
+      if (second === 0 && this.random(1, 3) % 2 === 0) new Cloud(this).apply()
+      if (second === 0 && this.random(1, 3) % 2 === 0) new Cloud(this).apply()
+      if (second === 0 && this.random(1, 5) % 2 === 0) new Mountain(this).apply()
+    }
   }
 
   timerInit() {
@@ -91,14 +99,16 @@ class Main {
     // this.items.bg = new Bg(this).init(1).apply()
     // this.items.bg2 = new Bg(this).init(640).apply()
     //
-    new Cloud(this).apply()
-    new Cloud(this).apply()
-    new Mountain(this).apply()
+    new Cloud(this).init().apply()
+    new Cloud(this).init().apply()
+    new Mountain(this).init().apply()
     new Ground(this).apply()
     // this.items.river = new River(this)
     // this.items.maluta = new Maluta(this)
     // this.items.prayer = new Ninja(this).apply()
     // this.items.jumpBtn = new Jump(this).apply()
+
+    this.gameStart = true
   }
 
   clearScene(old) {
@@ -129,14 +139,20 @@ class Main {
   stop() {
     console.log('Main.stop')
     this.game.stop()
+    this.gameStart = false
   }
 
   clear() {
     this.clearScene()
+    this.gameStart  = false
   }
 
   load() {
     console.log('Main.load')
+  }
+
+  random(min = 0, max = 0) {
+    return Math.floor( Math.random() * (max + 1 - min) ) + min
   }
 }
 export default new Main()
