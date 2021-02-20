@@ -10,6 +10,7 @@ import Maluta from './sprite/_malta'
 import Rook from './sprite/_rook'
 import Musha from './sprite/_musha'
 import Ashigaru from './sprite/_ashigaru'
+import Hinotama from './sprite/_hinotama'
 
 class Main {
   constructor() {
@@ -55,6 +56,7 @@ class Main {
       'img/rook.png',
       'img/musha.png',
       'img/ashigaru.png',
+      'img/hinotama.png',
     )
     this.game.preload('bgm/se_maoudamashii_retro08.mp3')
   }
@@ -87,6 +89,7 @@ class Main {
     if (this.random(1, 5) === 1) new Rook(this).apply()
     if (this.random(1, 9) === 1) new River(this)
     if (this.random(1, 3) === 1) new Ashigaru(this).apply()
+    if (this.random(1, 3) === 1) new Hinotama(this).apply()
     // if (num === 2) new Maluta(this).apply()
   }
 
@@ -137,6 +140,7 @@ class Main {
     // new Maluta(this).apply()
     new Rook(this).apply()
     new Ashigaru(this).apply()
+    new Hinotama(this).apply()
     this.items.prayer = new Ninja(this).apply()
     this.items.jumpBtn = new Jump(this).apply()
     this.items.boss = new Musha(this).apply()
