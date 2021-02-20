@@ -1,4 +1,4 @@
-class Base {
+export default class EnemyBase {
   constructor(x, y, Controller) {
     this.controller = Controller 
     this.item = new Sprite(x, y)
@@ -7,9 +7,23 @@ class Base {
     this.game = Controller.game
 
     this.item.on('enterframe', () => this.on())
+    return this
+  }
+
+  move(num) {
+    this.item.x += num
   }
 
   on() {
+    this.move(this.controller.SCROLL_SPEED)
+    // const prayer = this.controller.items.prayer
+    // if (this.area.intersect(prayer.item)) {
+    //   prayer.slowRun()
+    //   this.controller.SCROLL_SPEED = 0
+    // } else {
+    //   prayer.backRun()
+    //   this.controller.SCROLL_SPEED = -10
+    // }
   }
 
   random(min = 0, max = 0) {
@@ -17,7 +31,7 @@ class Base {
   }
 
   before(reference) {
-    this.controller.scene.insertBefore(this.item, reference)
+    this.game.rootScene.insertBefore(this.item, reference)
     return this
   }
 
@@ -37,4 +51,3 @@ class Base {
   }
 }
 
-export default Base

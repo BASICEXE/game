@@ -6,7 +6,7 @@ export default class Rook extends Base {
     this.item.y = 500
     this.item.x = 640 + 251
     // this.item.x = 487
-    this.item.scale(0.6)
+    this.item.scale(0.2)
     this.image = this.game.assets['img/rook.png']
     return this
   }

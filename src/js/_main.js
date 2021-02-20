@@ -8,6 +8,8 @@ import Jump from './sprite/_janpBtn'
 import River from './sprite/_river'
 import Maluta from './sprite/_malta'
 import Rook from './sprite/_rook'
+import Musha from './sprite/_musha'
+import Ashigaru from './sprite/_ashigaru'
 
 class Main {
   constructor() {
@@ -50,6 +52,8 @@ class Main {
       'img/grand.png',
       'img/wind.png',
       'img/rook.png',
+      'img/musha.png',
+      'img/ashigaru.png',
     )
     this.game.preload('bgm/se_maoudamashii_retro08.mp3')
   }
@@ -71,6 +75,7 @@ class Main {
   hurdle() {
     if (this.random(1, 5) === 1) new Rook(this).apply()
     if (this.random(1, 9) === 1) new River(this)
+    if (this.random(1, 3) === 1) new Ashigaru(this).apply()
     // if (num === 2) new Maluta(this).apply()
   }
 
@@ -94,7 +99,7 @@ class Main {
   titleScene(old) {
     this.removeScene(old)
     const scene = new Scene()
-    const label = new Label('右端まで最速で走りきれ<br><br> タッチでゲームシーンへ')
+    const label = new Label('武者を捕まえろ<br><br> タッチでゲームシーンへ')
     label.textAlign = 'center'
     label.x = 180
     label.y = 300
@@ -120,7 +125,10 @@ class Main {
     new River(this)
     new Maluta(this).apply()
     new Rook(this).apply()
-    // this.items.prayer = new Ninja(this).apply()
+    new Ashigaru(this).apply()
+    this.items.prayer = new Ninja(this).apply()
+
+    this.items.boss = new Musha(this).apply()
     // this.items.jumpBtn = new Jump(this).apply()
 
     this.gameStart = true
@@ -144,30 +152,51 @@ class Main {
     this.replaceScene(scene)
   }
 
+  intersectPrayer(chara) {
+    const prayer = this.getData(this.items, 'prayer.item')
+    if (!prayer) return false
+    return prayer.intersect(chara)
+  }
 
   start() {
-    console.log('Main.start')
+    console.log('メイン処理開始')
     this.titleScene()
     this.game.start()
   }
 
   stop() {
-    console.log('Main.stop')
+    console.log('メイン処理停止')
     this.game.stop()
     this.gameStart = false
   }
 
   clear() {
+    console.log('スクリーンクリア')
     this.clearScene()
     this.gameStart  = false
   }
 
   load() {
-    console.log('Main.load')
+    console.log('メイン読み込み')
   }
 
   random(min = 0, max = 0) {
     return Math.floor( Math.random() * (max + 1 - min) ) + min
+  }
+
+  getData(object, path, defaultValue) {
+    if (!object) return null
+    const propertyArray = path.split('.')
+    let result = object
+    try {
+      propertyArray.map((value) => {
+        const r = result[value]
+        result = r
+      })
+      return result
+    } catch (e) {
+      return defaultValue
+    }
   }
 }
 export default new Main()

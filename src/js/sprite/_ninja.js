@@ -50,13 +50,17 @@ class Ninja extends Base {
     if (!this.isJump) {
       this.item.x += this.runSpeed
     }
-    if (this.item.x > 650) {
-      this.controller.clear()
-    }
+    // if (this.item.x > 650) {
+      // this.controller.clear()
+    // }
   }
 
   backRun() {
     this.runSpeed = 1
+  }
+
+  stop() {
+    this.slowRun 
   }
 
   slowRun() {

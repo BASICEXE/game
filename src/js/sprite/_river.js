@@ -25,13 +25,22 @@ class River extends Base {
     group.y = 640 - 148
     group.x = 640 + 153
     this.group = group
-    this.controller.scene.addChild(this.group)
 
     return this
   }
 
   move(num) {
     this.group.x += num
+  }
+
+  before(reference) {
+    this.controller.scene.insertBefore(this.group, reference)
+    return this
+  }
+
+  apply() {
+    this.controller.scene.addChild(this.group)
+    return this
   }
 
   on() {
