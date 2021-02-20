@@ -1,4 +1,5 @@
 import EnemyBase from './_enemyBase'
+import Bakuhatu from './_bakuhatu'
 
 export default class Ashigaru extends EnemyBase {
   constructor(Controller) {
@@ -27,6 +28,7 @@ export default class Ashigaru extends EnemyBase {
       this.controller.SCROLL_FLG = 1
       prayer.runSpeed = 0
       prayer.SPEED_FLG = 1
+      new Bakuhatu(this.controller, this.item.y - 55, this.item.x -65)
       this.item.remove()
     }
   }

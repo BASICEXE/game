@@ -57,6 +57,8 @@ class Main {
       'img/musha.png',
       'img/ashigaru.png',
       'img/hinotama.png',
+      'img/bakuhatsu3.png',
+      'img/bakuhatsu1.png',
     )
     this.game.preload('bgm/se_maoudamashii_retro08.mp3')
   }
