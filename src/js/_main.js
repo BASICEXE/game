@@ -1,12 +1,13 @@
 // import Factory from './model/_factory'
 import Ninja from './sprite/_ninja'
-import Bg from './sprite/_bg'
+// import Bg from './sprite/_bg'
 import Cloud from './sprite/_cloud'
 import Mountain from './sprite/_mountain'
 import Ground from './sprite/_ground'
 import Jump from './sprite/_janpBtn'
 import River from './sprite/_river'
 import Maluta from './sprite/_malta'
+import Rook from './sprite/_rook'
 
 class Main {
   constructor() {
@@ -40,7 +41,16 @@ class Main {
 
   facade() {
     console.log('Main.facade')
-    this.game.preload('img/ninja.png', 'img/bg.jpg', 'img/btn_jump.png', 'img/kawa.png', 'img/maruta.jpg', 'img/cloud.png', 'img/mountain.png', 'img/grand.png')
+    this.game.preload(
+      'img/ninja.png',
+      'img/btn_jump.png',
+      'img/kawa.png',
+      'img/cloud.png',
+      'img/mountain.png',
+      'img/grand.png',
+      'img/wind.png',
+      'img/rook.png',
+    )
     this.game.preload('bgm/se_maoudamashii_retro08.mp3')
   }
 
@@ -51,10 +61,17 @@ class Main {
 
     if (this.gameStart) {
       const second = this.flameCount % this.fps
-      if (second === 0 && this.random(1, 3) % 2 === 0) new Cloud(this).apply()
-      if (second === 0 && this.random(1, 3) % 2 === 0) new Cloud(this).apply()
-      if (second === 0 && this.random(1, 5) % 2 === 0) new Mountain(this).apply()
+      if (second === 0 && this.random(1, 3) === 1) new Cloud(this).apply()
+      if (second === 0 && this.random(1, 4) === 1) new Cloud(this).apply()
+      if (second === 0 && this.random(1, 5) === 1) new Mountain(this).apply()
+      if (second === 0) this.hurdle()
     }
+  }
+
+  hurdle() {
+    if (this.random(1, 5) === 1) new Rook(this).apply()
+    if (this.random(1, 9) === 1) new River(this)
+    // if (num === 2) new Maluta(this).apply()
   }
 
   timerInit() {
@@ -96,15 +113,13 @@ class Main {
 
     this.replaceScene(scene)
     scene.backgroundColor = '#4a62e6'
-    // this.items.bg = new Bg(this).init(1).apply()
-    // this.items.bg2 = new Bg(this).init(640).apply()
-    //
     new Cloud(this).init().apply()
     new Cloud(this).init().apply()
     new Mountain(this).init().apply()
     new Ground(this).apply()
-    // this.items.river = new River(this)
-    // this.items.maluta = new Maluta(this)
+    new River(this)
+    new Maluta(this).apply()
+    new Rook(this).apply()
     // this.items.prayer = new Ninja(this).apply()
     // this.items.jumpBtn = new Jump(this).apply()
 

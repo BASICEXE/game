@@ -1,13 +1,13 @@
 import Base from './_base'
 
-class Maluta extends Base {
+export default class Rook extends Base {
   constructor(Controller) {
-    super(181, 81, Controller)
-    this.item.y = 340
-    this.item.x = 640 + 181
+    super(251, 127, Controller)
+    this.item.y = 500
+    this.item.x = 640 + 251
     // this.item.x = 487
-    this.item.scale(0.8)
-    this.image = this.game.assets['img/wind.png']
+    this.item.scale(0.6)
+    this.image = this.game.assets['img/rook.png']
     return this
   }
 
@@ -28,4 +28,3 @@ class Maluta extends Base {
   }
 }
 
-export default Maluta
