@@ -184,6 +184,11 @@ class Main {
     return Math.floor( Math.random() * (max + 1 - min) ) + min
   }
 
+  scroll(num) {
+    if (!num) return this.SCROLL_SPEED
+    this.SCROLL_SPEED = num
+  }
+
   getData(object, path, defaultValue) {
     if (!object) return null
     const propertyArray = path.split('.')

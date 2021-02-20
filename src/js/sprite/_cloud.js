@@ -19,10 +19,7 @@ class Cloud extends Base {
   }
 
   on() {
-    this.item.x += (this.controller.SCROLL_SPEED + this.SPEED)
-    // if (this.item.x <= -171) {
-    //   this.item.x = 640
-    // }
+    this.item.x += (this.controller.scroll() + this.SPEED)
   }
 }
 

@@ -16,10 +16,7 @@ class Mountain extends Base {
   }
 
   on() {
-    this.item.x += this.controller.SCROLL_SPEED
-    // if (this.item.x <= -171) {
-    //   this.item.x = 640
-    // }
+    this.item.x += this.controller.scroll()
   }
 }
 

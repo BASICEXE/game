@@ -15,14 +15,14 @@ export default class EnemyBase {
   }
 
   on() {
-    this.move(this.controller.SCROLL_SPEED)
+    this.move(this.controller.scroll())
     // const prayer = this.controller.items.prayer
     // if (this.area.intersect(prayer.item)) {
     //   prayer.slowRun()
-    //   this.controller.SCROLL_SPEED = 0
+    //   this.controller.scroll(0)
     // } else {
     //   prayer.backRun()
-    //   this.controller.SCROLL_SPEED = -10
+    //   this.controller.scroll(-10)
     // }
   }
 

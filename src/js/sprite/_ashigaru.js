@@ -20,14 +20,11 @@ export default class Ashigaru extends EnemyBase {
   }
 
   on() {
-    this.move(this.controller.SCROLL_SPEED)
+    this.move(this.controller.scroll())
     const prayer = this.controller.items.prayer
     if (this.controller.intersectPrayer(this.item)) {
       prayer.slowRun()
-      // this.controller.SCROLL_SPEED = 0
-    } else {
-      prayer.backRun()
-      // this.controller.SCROLL_SPEED = -10
+      this.item.remove()
     }
   }
 }

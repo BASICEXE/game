@@ -5,7 +5,6 @@ class River extends Base {
     super(153, 153, Controller)
     this.item.y = 0
     this.item.x = 0
-    this.SCROLL_SPEED = 10
     this.image = this.game.assets['img/kawa.png']
     this.item.image = this.image
 
@@ -44,14 +43,14 @@ class River extends Base {
   }
 
   on() {
-    this.move(this.controller.SCROLL_SPEED)
+    this.move(this.controller.scroll())
     // const prayer = this.controller.items.prayer
     // if (this.area.intersect(prayer.item)) {
     //   prayer.slowRun()
-    //   this.controller.SCROLL_SPEED = -5
+    //   this.controller.scroll(-5)
     // } else {
     //   prayer.backRun()
-    //   this.controller.SCROLL_SPEED = -10
+    //   this.controller.scroll(-10)
     // }
   }
 }
