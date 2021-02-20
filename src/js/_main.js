@@ -16,6 +16,7 @@ class Main {
     console.log('Main.constructor')
     this.game = null
     this.SCROLL_SPEED = -10
+    this.SCROLL_FLG = 0
   }
 
   init(game) {
@@ -63,13 +64,23 @@ class Main {
     this.flameCount += 1
     this.second = this.flameCount / this.fps
 
+    // ストップ秒数がある場合
+    if (this.isSecond() && this.SCROLL_FLG > 0) this.SCROLL_FLG -= 1
+    // ストップ秒数がない場合
+    if (this.isSecond() && this.SCROLL_FLG === 0) this.SCROLL_SPEED = -10
+
     if (this.gameStart) {
-      const second = this.flameCount % this.fps
-      if (second === 0 && this.random(1, 3) === 1) new Cloud(this).apply()
-      if (second === 0 && this.random(1, 4) === 1) new Cloud(this).apply()
-      if (second === 0 && this.random(1, 5) === 1) new Mountain(this).apply()
-      if (second === 0) this.hurdle()
+      const isSecond = this.isSecond()
+      if (isSecond && this.random(1, 3) === 1) new Cloud(this).apply()
+      if (isSecond && this.random(1, 4) === 1) new Cloud(this).apply()
+      if (isSecond && this.random(1, 5) === 1) new Mountain(this).apply()
+      if (isSecond) this.hurdle()
     }
+  }
+
+  isSecond() {
+    // 秒を判定する
+    return this.flameCount % this.fps === 0
   }
 
   hurdle() {
@@ -123,15 +134,27 @@ class Main {
     new Mountain(this).init().apply()
     new Ground(this).apply()
     new River(this)
-    new Maluta(this).apply()
+    // new Maluta(this).apply()
     new Rook(this).apply()
     new Ashigaru(this).apply()
     this.items.prayer = new Ninja(this).apply()
-
+    this.items.jumpBtn = new Jump(this).apply()
     this.items.boss = new Musha(this).apply()
-    // this.items.jumpBtn = new Jump(this).apply()
 
     this.gameStart = true
+  }
+
+  overScene(old) {
+    this.removeScene(old)
+    const scene = new Scene()
+    const label = new Label('GAME OVER')
+    label.y = 280
+    label.x = 230
+    label.font = '26px sans-serif'
+
+    scene.addChild(label)
+    scene.on('touchstart', () => this.titleScene())
+    this.replaceScene(scene)
   }
 
   clearScene(old) {
@@ -142,7 +165,7 @@ class Main {
     label.x = 230
     label.font = '26px sans-serif'
 
-    const time = new Label(`クリアタイム ${this.second}秒`)
+    const time = new Label(`タイム ${this.second}秒`)
     time.font = '26px sans-serif'
     time.y = 320
     time.x = 180
@@ -170,6 +193,11 @@ class Main {
     this.gameStart = false
   }
 
+  over() {
+    this.overScene()
+    this.gameStart  = false
+  }
+
   clear() {
     console.log('スクリーンクリア')
     this.clearScene()
@@ -184,9 +212,8 @@ class Main {
     return Math.floor( Math.random() * (max + 1 - min) ) + min
   }
 
-  scroll(num) {
-    if (!num) return this.SCROLL_SPEED
-    this.SCROLL_SPEED = num
+  scroll() {
+    return this.SCROLL_SPEED
   }
 
   getData(object, path, defaultValue) {

@@ -11,7 +11,7 @@ export default class Ashigaru extends EnemyBase {
     this.item.frame = [0, 1, 2]
     this.image = this.game.assets['img/ashigaru.png']
 
-    this.runSpeed = 1
+    this.runSpeed = -1
     return this
   }
 
@@ -23,7 +23,10 @@ export default class Ashigaru extends EnemyBase {
     this.move(this.controller.scroll())
     const prayer = this.controller.items.prayer
     if (this.controller.intersectPrayer(this.item)) {
-      prayer.slowRun()
+      this.controller.SCROLL_SPEED = 0
+      this.controller.SCROLL_FLG = 1
+      prayer.runSpeed = 0
+      prayer.SPEED_FLG = 1
       this.item.remove()
     }
   }

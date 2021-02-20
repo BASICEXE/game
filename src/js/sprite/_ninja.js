@@ -15,6 +15,7 @@ class Ninja extends Base {
     this.soundEffect = this.game.assets['bgm/se_maoudamashii_retro08.mp3'].clone()
     this.image = this.game.assets['img/ninja.png']
     this.runSpeed = 1
+    this.SPEED_FLG = 0
     return this
   }
 
@@ -46,21 +47,26 @@ class Ninja extends Base {
     }
   }
 
+  runState() {
+    if (this.SPEED_FLG > 0) this.item.frame = [2]
+    if (this.SPEED_FLG === 0) this.item.frame = [0, 1, 2]
+  }
+
   run() {
-    if (!this.isJump) {
-      this.item.x += this.runSpeed
-    }
-    // if (this.item.x > 650) {
-      // this.controller.clear()
-    // }
+    this.runState()
+    if (this.controller.isSecond() && this.SPEED_FLG > 0) this.SPEED_FLG -= 1
+    if (this.controller.isSecond() && this.SPEED_FLG === 0) this.runSpeed = 1
+    if (!this.isJump) this.item.x += this.runSpeed
+    // this.item.x += this.runSpeed
+    // if (this.item.x > 650) this.controller.clear()
+  }
+
+  speed() {
+    return this.SCROLL_SPEED
   }
 
   backRun() {
     this.runSpeed = 1
-  }
-
-  stop() {
-    this.slowRun 
   }
 
   slowRun() {
