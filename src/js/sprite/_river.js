@@ -23,7 +23,7 @@ class River extends Base {
     group.addChild(this.item)
     group.y = 640 - 148
     group.x = 640 + 153
-    this.group = group
+    this.item = group
 
     return this
   }
@@ -32,13 +32,9 @@ class River extends Base {
     this.group.x += num
   }
 
-  before(reference) {
-    this.controller.scene.insertBefore(this.group, reference)
-    return this
-  }
-
-  apply() {
-    this.controller.scene.addChild(this.group)
+  apply(group) {
+    this.group = group
+    this.group.addChild(this.group)
     return this
   }
 

@@ -75,9 +75,9 @@ class Main {
 
     if (this.gameStart) {
       const isSecond = this.isSecond()
-      if (isSecond && this.random(1, 3) === 1) new Cloud(this).apply()
-      if (isSecond && this.random(1, 4) === 1) new Cloud(this).apply()
-      if (isSecond && this.random(1, 5) === 1) new Mountain(this).apply()
+      if (isSecond && this.random(1, 3) === 1) new Cloud(this).apply(this.bgGroup)
+      if (isSecond && this.random(1, 4) === 1) new Cloud(this).apply(this.bgGroup)
+      if (isSecond && this.random(1, 5) === 1) new Mountain(this).apply(this.bgGroup)
       if (isSecond) this.hurdle()
     }
   }
@@ -88,10 +88,10 @@ class Main {
   }
 
   hurdle() {
-    if (this.random(1, 5) === 1) new Rook(this).apply()
-    if (this.random(1, 9) === 1) new River(this)
-    if (this.random(1, 3) === 1) new Ashigaru(this).apply()
-    if (this.random(1, 3) === 1) new Hinotama(this).apply()
+    if (this.random(1, 5) === 1) new Rook(this).apply(this.bgGroup)
+    // if (this.random(1, 9) === 1) new River(this),apply(this.bgGroup)
+    if (this.random(1, 3) === 1) new Ashigaru(this).apply(this.charaGroup)
+    if (this.random(1, 3) === 1) new Hinotama(this).apply(this.charaGroup)
     // if (num === 2) new Maluta(this).apply()
   }
 
@@ -134,18 +134,28 @@ class Main {
 
     this.replaceScene(scene)
     scene.backgroundColor = '#4a62e6'
-    new Cloud(this).init().apply()
-    new Cloud(this).init().apply()
-    new Mountain(this).init().apply()
-    new Ground(this).apply()
-    new River(this)
-    // new Maluta(this).apply()
-    new Rook(this).apply()
-    new Ashigaru(this).apply()
-    new Hinotama(this).apply()
-    this.items.prayer = new Ninja(this).apply()
-    this.items.jumpBtn = new Jump(this).apply()
-    this.items.boss = new Musha(this).apply()
+
+    const ctlGroup = new Group()
+    const bgGroup = new Group()
+    const charaGroup = new Group()
+
+    this.items.prayer = new Ninja(this).apply(charaGroup)
+    this.items.boss = new Musha(this).apply(charaGroup)
+    new Hinotama(this).apply(charaGroup)
+    new Ashigaru(this).apply(charaGroup)
+    this.items.jumpBtn = new Jump(this).apply(ctlGroup)
+
+    new Ground(this).apply(bgGroup)
+    new Cloud(this).init().apply(bgGroup)
+    new Cloud(this).init().apply(bgGroup)
+    new Mountain(this).init().apply(bgGroup)
+    new Rook(this).apply(bgGroup)
+
+    this.scene.addChild(bgGroup)
+    this.scene.addChild(charaGroup)
+    this.scene.addChild(ctlGroup)
+    this.bgGroup = bgGroup
+    this.charaGroup = charaGroup
 
     this.gameStart = true
   }

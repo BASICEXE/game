@@ -16,19 +16,16 @@ class Base {
     return Math.floor( Math.random() * (max + 1 - min) ) + min
   }
 
-  before(reference) {
-    this.controller.scene.insertBefore(this.item, reference)
-    return this
-  }
-
-  apply() {
+  apply(group) {
     this.item.image = this.image
-    this.controller.scene.addChild(this.item)
+    this.group = group
+    this.group.addChild(this.item)
     return this
   }
 
   remove() {
-    this.controller.scene.removeChild(this.item)
+    if (!this.group) return this
+    this.group.removeChild(this.item)
     return this
   }
 
