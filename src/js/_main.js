@@ -41,6 +41,7 @@ class Main {
     this.second = 0
     this.scene = null
     this.gameStart = false
+    this.restart = 0
   }
 
   facade() {
@@ -66,7 +67,7 @@ class Main {
   on() {
     console.log('Main.on')
     this.flameCount += 1
-    this.second = this.flameCount / this.fps
+    if (this.isSecond()) this.second += 1
 
     // ストップ秒数がある場合
     if (this.isSecond() && this.SCROLL_FLG > 0) this.SCROLL_FLG -= 1
@@ -91,7 +92,7 @@ class Main {
     if (this.random(1, 5) === 1) new Rook(this).apply(this.bgGroup)
     // if (this.random(1, 9) === 1) new River(this),apply(this.bgGroup)
     if (this.random(1, 3) === 1) new Ashigaru(this).apply(this.charaGroup)
-    if (this.random(1, 6) === 1) new Hinotama(this).apply(this.charaGroup)
+    if (this.random(1, 5) === 1) new Hinotama(this).apply(this.charaGroup)
     // if (num === 2) new Maluta(this).apply()
   }
 
@@ -163,12 +164,21 @@ class Main {
   overScene(old) {
     this.removeScene(old)
     const scene = new Scene()
+    scene.backgroundColor = '#333'
     const label = new Label('GAME OVER')
     label.y = 280
     label.x = 230
     label.font = '26px sans-serif'
+    label.color = '#ffffff'
+
+    const time = new Label(`タッチでリトライ`)
+    time.font = '26px sans-serif'
+    time.y = 320
+    time.x = 220
+    time.color = '#ffffff'
 
     scene.addChild(label)
+    scene.addChild(time)
     scene.on('touchstart', () => this.titleScene())
     this.replaceScene(scene)
   }
@@ -183,10 +193,15 @@ class Main {
 
     const time = new Label(`タイム ${this.second}秒`)
     time.font = '26px sans-serif'
-    time.y = 320
-    time.x = 180
+    time.y = 330
+    time.x = 250
+    const restart = new Label(`リスタート${this.restart}回`)
+    restart.font = '26px sans-serif'
+    restart.y = 380
+    restart.x = 220
     scene.addChild(label)
     scene.addChild(time)
+    scene.addChild(restart)
     scene.on('touchstart', () => this.titleScene())
     this.replaceScene(scene)
   }
@@ -211,6 +226,7 @@ class Main {
 
   over() {
     this.overScene()
+    this.restart += 1
     this.gameStart  = false
   }
 
