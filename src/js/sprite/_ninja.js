@@ -16,6 +16,7 @@ class Ninja extends Base {
     this.image = this.game.assets['img/ninja.png']
     this.runSpeed = 1
     this.SPEED_FLG = 0
+    this.isBan = false
     return this
   }
 
@@ -37,6 +38,7 @@ class Ninja extends Base {
   jump() {
     // ジャンプ中
     if (this.isJump) {
+      if (this.isBan) return null
       this.vy += 1
       this.item.y += this.vy
       if (this.item.y >= this.GROUND_Y) {
@@ -54,11 +56,18 @@ class Ninja extends Base {
 
   run() {
     this.runState()
-    if (this.controller.isSecond() && this.SPEED_FLG > 0) this.SPEED_FLG -= 1
-    if (this.controller.isSecond() && this.SPEED_FLG === 0) this.runSpeed = 1
+    if (this.controller.isSecond()) this.oneSecond()
+
     if (!this.isJump) this.item.x += this.runSpeed
     // this.item.x += this.runSpeed
     // if (this.item.x > 650) this.controller.clear()
+  }
+
+  oneSecond() {
+    // 一秒に一回実行
+    if (this.SPEED_FLG > 0) this.SPEED_FLG -= 1
+    if (this.SPEED_FLG === 0) this.runSpeed = 1
+    if (this.SPEED_FLG === 0) this.isBan = false
   }
 
   speed() {
@@ -71,6 +80,8 @@ class Ninja extends Base {
 
   slowRun() {
     this.runSpeed = 0
+    this.SPEED_FLG = 1
+    this.isBan = true
   }
 
   on() {

@@ -23,11 +23,13 @@ export default class Ashigaru extends EnemyBase {
   on() {
     this.move(this.controller.scroll())
     const prayer = this.controller.items.prayer
+    const boss = this.controller.items.boss
     if (this.controller.intersectPrayer(this.item)) {
       this.controller.SCROLL_SPEED = 0
       this.controller.SCROLL_FLG = 1
-      prayer.runSpeed = 0
-      prayer.SPEED_FLG = 1
+      prayer.slowRun()
+      boss.runSpeed = 4
+      boss.SPEED_FLG = 1
       new Bakuhatu(this.controller, this.item.y - 55, this.item.x -65)
       this.item.remove()
     }

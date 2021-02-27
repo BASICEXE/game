@@ -22,6 +22,8 @@ export default class Hinotama extends EnemyBase {
   move() {
     this.item.x += this.runSpeed
     this.item.y += this.random(-10, 10)
+    if (this.item.y > 460) this.item.y = 460
+    if (this.item.y > 380) this.item.y = 380
   }
 
   getDegree(min, max, n) {

@@ -91,7 +91,7 @@ class Main {
     if (this.random(1, 5) === 1) new Rook(this).apply(this.bgGroup)
     // if (this.random(1, 9) === 1) new River(this),apply(this.bgGroup)
     if (this.random(1, 3) === 1) new Ashigaru(this).apply(this.charaGroup)
-    if (this.random(1, 3) === 1) new Hinotama(this).apply(this.charaGroup)
+    if (this.random(1, 6) === 1) new Hinotama(this).apply(this.charaGroup)
     // if (num === 2) new Maluta(this).apply()
   }
 

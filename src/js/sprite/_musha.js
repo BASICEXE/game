@@ -12,12 +12,20 @@ export default class Musha extends EnemyBase {
     this.item.frame = [0, 1, 2]
     this.image = this.game.assets['img/musha.png']
 
-    this.runSpeed = 0.6
+    this.defaultRunSpeed = 0.4
+    this.runSpeed = this.defaultRunSpeed
+    this.SPEED_FLG = 0
     return this
   }
 
   move() {
+    if (this.controller.isSecond()) this.oneSecond()
     this.item.x += this.runSpeed
+  }
+
+  oneSecond() {
+    if (this.SPEED_FLG > 0) this.SPEED_FLG -= 1
+    if (this.SPEED_FLG === 0) this.runSpeed = this.defaultRunSpeed
   }
 
   on() {
