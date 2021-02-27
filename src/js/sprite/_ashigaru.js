@@ -13,6 +13,8 @@ export default class Ashigaru extends EnemyBase {
     this.image = this.game.assets['img/ashigaru.png']
 
     this.runSpeed = -1
+    this.isJump = false
+    this.GROUND_Y = 490
     return this
   }
 
@@ -22,6 +24,7 @@ export default class Ashigaru extends EnemyBase {
 
   on() {
     this.move(this.controller.scroll())
+    this.jump()
     const prayer = this.controller.items.prayer
     const boss = this.controller.items.boss
     if (this.controller.intersectPrayer(this.item)) {
@@ -32,6 +35,25 @@ export default class Ashigaru extends EnemyBase {
       boss.SPEED_FLG = 1
       new Bakuhatu(this.controller, this.item.y - 55, this.item.x -65)
       this.item.remove()
+    }
+  }
+
+  jump() {
+    if (this.random(1, 35) === 1) {
+      if (!this.isJump) {
+        this.isJump = true
+        this.vy = this.random(-10, -15)
+      }
+    }
+    // ジャンプ中
+    if (this.isJump) {
+      this.vy += 1
+      this.item.y += this.vy
+      if (this.item.y >= this.GROUND_Y) {
+        this.item.y = this.GROUND_Y
+        this.isJump = false
+        this.item.frame = [0, 1, 2]
+      }
     }
   }
 }
