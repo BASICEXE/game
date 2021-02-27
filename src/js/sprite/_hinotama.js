@@ -4,8 +4,8 @@ import Bakuhatu2 from './_bakuhatu2'
 export default class Hinotama extends EnemyBase {
   constructor(Controller) {
     super(39, 25, Controller)
-    // this.item.y = this.random(380, 460)
-    this.item.y = 460
+    this.item.y = this.random(380, 460)
+    // this.item.y = 460
     this.item.x = 620
 
     this.item.scale(1.5)
@@ -21,6 +21,13 @@ export default class Hinotama extends EnemyBase {
 
   move() {
     this.item.x += this.runSpeed
+    this.item.y += this.random(-10, 10)
+  }
+
+  getDegree(min, max, n) {
+    n %= max
+    if (n < min) n += max
+    return n
   }
 
   on() {
