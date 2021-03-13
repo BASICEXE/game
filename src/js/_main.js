@@ -61,7 +61,12 @@ class Main {
       'img/bakuhatsu3.png',
       'img/bakuhatsu1.png',
     )
-    this.game.preload('bgm/se_maoudamashii_retro08.mp3')
+    this.game.preload(
+      'bgm/se_maoudamashii_retro08.mp3',
+      'bgm/MusMus-BGM-122.mp3',
+      'bgm/MusMus-BGM-115.mp3',
+      'bgm/MusMus-BGM-104.mp3',
+    )
   }
 
   on() {
@@ -115,6 +120,7 @@ class Main {
 
   titleScene(old) {
     this.removeScene(old)
+    if (this.bgm) this.bgm.stop()
     const scene = new Scene()
     const label = new Label('武者を捕まえろ<br><br> タッチでゲームシーンへ')
     label.textAlign = 'center'
@@ -133,6 +139,8 @@ class Main {
     this.timerInit()
     const scene = new Scene()
 
+    this.bgm = this.game.assets['bgm/MusMus-BGM-122.mp3'].clone()
+    this.bgm.play()
     this.replaceScene(scene)
     scene.backgroundColor = '#4a62e6'
 
@@ -163,6 +171,10 @@ class Main {
 
   overScene(old) {
     this.removeScene(old)
+    this.bgm.stop()
+    this.bgm = this.game.assets['bgm/MusMus-BGM-104.mp3'].clone()
+    this.bgm.play()
+
     const scene = new Scene()
     scene.backgroundColor = '#333'
     const label = new Label('GAME OVER')
