@@ -202,6 +202,23 @@ class Main {
     scene.addChild(label)
     scene.addChild(time)
     scene.addChild(restart)
+    scene.on('touchstart', () => this.endScene())
+    this.replaceScene(scene)
+  }
+
+  endScene(old) {
+    this.removeScene(old)
+    const scene = new Scene()
+    const label = new Label('使用素材')
+    label.y = 80
+    label.x = 280
+    label.font = '26px sans-serif'
+    const restart = new Label('フリーBGM・音楽素材MusMus <br>https://musmus.main.jp/<br>・Mid-range Strength<br>・隠密ファンク<br>・希望の青')
+    restart.font = '16px sans-serif'
+    restart.y = 180
+    restart.x = 220
+    scene.addChild(label)
+    scene.addChild(restart)
     scene.on('touchstart', () => this.titleScene())
     this.replaceScene(scene)
   }
