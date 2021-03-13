@@ -38,9 +38,8 @@ class Ninja extends Base {
   jump() {
     // ジャンプ中
     if (this.isJump) {
-      if (this.isBan) return null
       this.vy += 1
-      this.item.y += this.vy
+      if (!this.isBan) this.item.y += this.vy
       if (this.item.y >= this.GROUND_Y) {
         this.item.y = this.GROUND_Y
         this.isJump = false
