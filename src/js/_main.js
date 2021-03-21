@@ -11,6 +11,7 @@ import Rook from './sprite/_rook'
 import Musha from './sprite/_musha'
 import Ashigaru from './sprite/_ashigaru'
 import Hinotama from './sprite/_hinotama'
+import { MyLabel } from './model/_label'
 
 class Main {
   constructor() {
@@ -122,13 +123,8 @@ class Main {
     this.removeScene(old)
     if (this.bgm) this.bgm.stop()
     const scene = new Scene()
-    const label = new Label('武者を捕まえろ<br><br> タッチでゲームシーンへ')
-    label.textAlign = 'center'
-    label.x = 180
-    label.y = 300
-    label.font = '26px sans-serif'
-    label.color = '#ffffff'
-    scene.addChild(label)
+    scene.addChild(MyLabel(scene, 180, 250, '武者を捕まえろ', 27, 'center', '#ffffff'))
+    scene.addChild(MyLabel(scene, 180, 300, 'タッチでゲームシーンへ', 27, 'center', '#ffffff'))
     scene.on('touchstart', () => this.gameScene(scene))
     this.replaceScene(scene)
     scene.backgroundColor = '#4a62e6'
@@ -171,26 +167,15 @@ class Main {
 
   overScene(old) {
     this.removeScene(old)
-    this.bgm.stop()
+    if (this.bgm) this.bgm.stop()
     this.bgm = this.game.assets['bgm/MusMus-BGM-104.mp3'].clone()
     this.bgm.play()
 
     const scene = new Scene()
     scene.backgroundColor = '#333'
-    const label = new Label('GAME OVER')
-    label.y = 280
-    label.x = 230
-    label.font = '26px sans-serif'
-    label.color = '#ffffff'
+    scene.addChild(MyLabel(scene, 180, 250, 'GAME OVER', 30, 'center', '#ffffff'))
+    scene.addChild(MyLabel(scene, 190, 300, `タッチでリトライ`, 30, 'center', '#ffffff'))
 
-    const time = new Label(`タッチでリトライ`)
-    time.font = '26px sans-serif'
-    time.y = 320
-    time.x = 220
-    time.color = '#ffffff'
-
-    scene.addChild(label)
-    scene.addChild(time)
     scene.on('touchstart', () => this.titleScene())
     this.replaceScene(scene)
   }
@@ -198,22 +183,9 @@ class Main {
   clearScene(old) {
     this.removeScene(old)
     const scene = new Scene()
-    const label = new Label('GAME CLEAR')
-    label.y = 280
-    label.x = 230
-    label.font = '26px sans-serif'
-
-    const time = new Label(`タイム ${this.second}秒`)
-    time.font = '26px sans-serif'
-    time.y = 330
-    time.x = 250
-    const restart = new Label(`リスタート${this.restart}回`)
-    restart.font = '26px sans-serif'
-    restart.y = 380
-    restart.x = 220
-    scene.addChild(label)
-    scene.addChild(time)
-    scene.addChild(restart)
+    scene.addChild(MyLabel(scene, 230, 280, 'GAME CLEAR', 30, 'center'))
+    scene.addChild(MyLabel(scene, 250, 330, `タイム ${this.second}秒`, 30, 'center'))
+    scene.addChild(MyLabel(scene, 220, 380, `リスタート${this.restart}回`, 30, 'center'))
     scene.on('touchstart', () => this.endScene())
     this.replaceScene(scene)
   }
@@ -221,16 +193,8 @@ class Main {
   endScene(old) {
     this.removeScene(old)
     const scene = new Scene()
-    const label = new Label('使用素材')
-    label.y = 80
-    label.x = 280
-    label.font = '26px sans-serif'
-    const restart = new Label('フリーBGM・音楽素材MusMus <br>https://musmus.main.jp/<br>・Mid-range Strength<br>・隠密ファンク<br>・希望の青')
-    restart.font = '16px sans-serif'
-    restart.y = 180
-    restart.x = 220
-    scene.addChild(label)
-    scene.addChild(restart)
+    scene.addChild(MyLabel(scene, 280, 80, '使用素材', 26, 'center'))
+    scene.addChild(MyLabel(scene, 220, 180, 'フリーBGM・音楽素材MusMus <br>https://musmus.main.jp/<br>・Mid-range Strength<br>・隠密ファンク<br>・希望の青', 16, 'center'))
     scene.on('touchstart', () => this.titleScene())
     this.replaceScene(scene)
   }
