@@ -4,11 +4,11 @@ class Ninja extends Base {
   constructor(Controller) {
     super(16, 25, Controller)
     this.isJump = false
-    this.GROUND_Y = 492
+    this.GROUND_Y = 468
     this.item.on('touchstart', () => this.touchstart())
     this.item.on('touchend', () => this.touchend())
     this.item.x = 50
-    this.item.scale(2)
+    this.item.scale(3)
     this.item.frame = [0, 1, 2]
     this.item.y = this.GROUND_Y
 

@@ -5,7 +5,7 @@ class jumpBtn extends Base {
     super(50, 50, Controller)
     this.item.y = 550
     this.item.x = 500
-    // this.item.scale(2)
+    this.item.scale(2)
     this.item.on('touchstart', () => this.touchstart())
     this.item.on('touchend', () => this.touchend())
 

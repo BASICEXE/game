@@ -6,7 +6,7 @@ export default class Bakuhatu extends EnemyBase {
     this.item.y = y
     this.item.x = x
 
-    this.item.scale(-0.5)
+    this.item.scale(-0.8)
     // this.item.scaleX = -1.5
 
     this.item.frame = 0
