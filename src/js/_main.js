@@ -194,7 +194,7 @@ class Main {
     this.removeScene(old)
     const scene = new Scene()
     scene.addChild(MyLabel(scene, 280, 80, '使用素材', 26, 'center'))
-    scene.addChild(MyLabel(scene, 220, 180, 'フリーBGM・音楽素材MusMus <br>https://musmus.main.jp/<br>・Mid-range Strength<br>・隠密ファンク<br>・希望の青', 16, 'center'))
+    scene.addChild(MyLabel(scene, 220, 180, 'フリーBGM・音楽素材MusMus <br>https://musmus.main.jp/<br>・Mid-range Strength<br>・隠密ファンク<br>・希望の青', 16, 'left'))
     scene.on('touchstart', () => this.titleScene())
     this.replaceScene(scene)
   }
