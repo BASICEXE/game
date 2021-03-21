@@ -49,6 +49,7 @@ export default class Ashigaru extends EnemyBase {
     if (this.isJump) {
       this.vy += 1
       this.item.y += this.vy
+      this.item.frame = 0
       if (this.item.y >= this.GROUND_Y) {
         this.item.y = this.GROUND_Y
         this.isJump = false

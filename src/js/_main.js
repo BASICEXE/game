@@ -61,8 +61,6 @@ class Main {
       'img/hinotama.png',
       'img/bakuhatsu3.png',
       'img/bakuhatsu1.png',
-    )
-    this.game.preload(
       'bgm/se_maoudamashii_retro08.mp3',
       'bgm/MusMus-BGM-122.mp3',
       'bgm/MusMus-BGM-115.mp3',
