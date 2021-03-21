@@ -124,8 +124,8 @@ class Main {
     scene.addChild(MyLabel(scene, 180, 250, '武者を捕まえろ', 27, 'center', '#ffffff'))
     scene.addChild(MyLabel(scene, 180, 300, 'タッチでゲームシーンへ', 27, 'center', '#ffffff'))
     scene.on('touchstart', () => this.gameScene(scene))
-    this.replaceScene(scene)
     scene.backgroundColor = '#4a62e6'
+    this.replaceScene(scene)
   }
 
   gameScene(old) {
