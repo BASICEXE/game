@@ -12,8 +12,10 @@ export default class Bakuhatu extends EnemyBase {
     this.item.frame = 0
     this.item.image = this.game.assets['img/bakuhatsu3.png']
     this.controller.scene.addChild(this.item)
+    this.soundEffect = this.game.assets['bgm/panti.mp3'].clone()
 
     this.item.on('enterframe', () => this.on())
+    this.soundEffect.play()
     return this
   }
 

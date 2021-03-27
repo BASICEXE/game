@@ -65,6 +65,8 @@ class Main {
       'bgm/MusMus-BGM-122.mp3',
       'bgm/MusMus-BGM-115.mp3',
       'bgm/MusMus-BGM-104.mp3',
+      'bgm/panti.mp3',
+      'bgm/bakuhatu.mp3',
     )
   }
 
@@ -165,10 +167,6 @@ class Main {
 
   overScene(old) {
     this.removeScene(old)
-    if (this.bgm) this.bgm.stop()
-    this.bgm = this.game.assets['bgm/MusMus-BGM-104.mp3'].clone()
-    this.bgm.play()
-
     const scene = new Scene()
     scene.backgroundColor = '#333'
     scene.addChild(MyLabel(scene, 180, 250, 'GAME OVER', 30, 'center', '#ffffff'))
@@ -176,6 +174,9 @@ class Main {
 
     scene.on('touchstart', () => this.titleScene())
     this.replaceScene(scene)
+    if (this.bgm) this.bgm.stop()
+    this.bgm = this.game.assets['bgm/MusMus-BGM-104.mp3'].clone()
+    this.bgm.play()
   }
 
   clearScene(old) {
